@@ -9,7 +9,7 @@ addpath(genpath(scripts_path));
 
 %% folders
 
-dataset_name                = input("data set name? eg 'HEALTHY_006'\n");
+dataset_name                = 'HEALTHY_006'; 
 
 
 filePath    = matlab.desktop.editor.getActiveFilename;
