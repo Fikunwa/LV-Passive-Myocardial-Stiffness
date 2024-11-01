@@ -3,3 +3,5 @@ Summary: Framework for MRI-driven passive myocardial stiffness estimation using 
 The optimization was done in MATLAB, with FEBio (https://febio.org/downloads/) as the forward solver. 
 Of note, you also need to install the Gibbon toolbox on MATLAB (https://www.gibboncode.org/), and may need other MATLAB toolboxes. 
 If there is any issue with running the code, please reach out to author – Fikunwa Kolawole at fikunwa@stanford.edu
+
+The MATLAB optimization script is in the 00_scripts folder. Running this to perform the passive material parameter optimization using the provided forward FE model.
