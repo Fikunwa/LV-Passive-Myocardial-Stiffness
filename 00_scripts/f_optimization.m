@@ -25,16 +25,6 @@ remesh_folder               = fullfile(dataAnalysis_folder, '01_bSSFP/04_LV_mode
 
 febioModel_folder           = fullfile(dataAnalysis_folder, '04_PassiveMechanics/');
 
-grid_LAX_folder             = fullfile(dataAnalysis_folder, '02_grid/03_reg2cardiac/02_sliceAligned_data/v2/03_lax_align/03_data_aligned_nrrd_sorted/LAX');
-if ~exist(grid_LAX_folder, 'dir')
-    grid_LAX_folder = fullfile(dataAnalysis_folder, '02_grid/03_reg2cardiac/01_raw_data_sorted_nrrd/LAX');
-end
-
-grid_SAX_folder             = fullfile(dataAnalysis_folder, '02_grid/03_reg2cardiac/02_sliceAligned_data/v2/02_sax_align_w_bssfp/03_data_aligned_nrrd_sorted/SAX/');
-if ~exist(grid_SAX_folder, 'dir')
-    grid_SAX_folder = fullfile(dataAnalysis_folder, '02_grid/03_reg2cardiac/01_raw_data_sorted_nrrd/SAX');
-end
-
 optimization_folder         = fullfile(dataAnalysis_folder, '04_PassiveMechanics/01_FEM/02_optimization'); 
 
 if ~exist(optimization_folder, 'dir')    
@@ -137,13 +127,6 @@ ylim([-40 40])
 %%%% tracked slices but bounded by the most apical and basal slices %%%%%%%%%%%%  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% % load grid nrrd images
-% grid_SAX_image_info = dir(fullfile(grid_SAX_folder, ['*phase' num2str(DS_phase_number, '%03.0f') '.nrrd']));
-% grid_SAX_image      = nhdr_nrrd_read(fullfile(grid_SAX_image_info.folder, grid_SAX_image_info.name), true);
-% 
-% long_vector     = grid_SAX_image.spacedirections_matrix(:,3); % vector pointing in longitudinal dir
-% no_slices       = size(grid_SAX_image.data, 3)-2;
-
 long_vector     = [-9.9444 0.026546 -0.55673]'; % for HEALTHY_006
 no_slices       = 9; % for HEALTHY_006
 meshNodes       = febioExtractNodalPositions(febioFebFileName);
@@ -212,7 +195,7 @@ febioNodePosFileName    = fullfile(optimization_folder,'nodePos.log'); %Log file
 %%%%%%%%%% parameter initial guess %%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% set initial guess to params from Nasopoulou improved... fix alpha, rf and rt
+% set initial guess to params from Nasopoulou et al. improved... fix alpha, rf and rt
 c           = 1.7e-3; % in MPa
 alpha       = 15;
 rf          = .55;
@@ -505,7 +488,7 @@ function [Fopt,OPT_stats_out]=objectiveFunctionIFEA(c_params_transIso_normalized
     %%%%%%%%%%%%%% Setting material parameters %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
-    % Acces material parameters
+    % Access material parameters
     mat_struct                               = objectiveStruct.mat_struct;
     mat_struct.param_transIso_constrained    = param_transIso_constrained;
     
